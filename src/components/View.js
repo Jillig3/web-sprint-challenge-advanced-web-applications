@@ -21,7 +21,7 @@ const View = (props) => {
             setArticles(res.data);
         })
         .catch(err=>{
-            console.log(err.response);
+            console.log(err);
         })
     });
  
@@ -38,6 +38,15 @@ const View = (props) => {
     }
 
     const handleEdit = (article) => {
+        axiosWithAuth()
+        .put(`/articles/${id}`, article)
+        .then(res=>{
+            setEditing(res.data);
+            push(`/articles`);
+        })
+        .catch(err=>{
+            console.log(err);
+        })
     }
 
     const handleEditSelect = (id)=> {
