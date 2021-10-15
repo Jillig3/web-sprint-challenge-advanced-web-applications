@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import PrivateRoute from './PrivateRoute';
 import styled from 'styled-components';
 
@@ -10,14 +10,16 @@ import Login from './Login';
 import Logout from './Logout';
 
 const App = () => {
+  
   return (
     <AppContainer>
       <LambdaHeader/>
       <Header/>
       <RouteContainer>
-        <Route exact path="/">
-          <Login/>
-        </Route>          
+          <PrivateRoute path="/view" component={View}/>
+          <PrivateRoute path="/logout" component={Logout}/>
+          <Login path="/login" component={Login}/>
+          <Route exact path="/" /> 
       </RouteContainer>
     </AppContainer>
   )

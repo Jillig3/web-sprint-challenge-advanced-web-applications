@@ -1,12 +1,51 @@
+import axios from 'axios';
 import React from 'react';
 import styled from 'styled-components';
 
-const Login = () => {
+const Login = (props) => {
+    // const []
+    // handleChange = e => {
+    //     this.setState({
+    //       credentials: {
+    //         ...this.state.credentials,
+    //         [e.target.name]: e.target.value
+    //       }
+    //     });
+    // };
+
+    // login = e => {
+    //     e.preventDefault();
+    //     axios.post("http://localhost:5000/api/login", this.state.credentials)
+    //         .then(resp => {
+    //             localStorage.setItem("token", resp.data.token);
+    //             localStorage.setItem("username", resp.data.username)
+    //         })
+    //         .catch(err=> {
+    //             console.log(err);
+    //         })
+    // }
+    
     
     return(<ComponentContainer>
         <ModalContainer>
             <h1>Welcome to Blogger Pro</h1>
             <h2>Please enter your account information.</h2>
+            <div>
+                <form>
+                    <input
+                        type="text"
+                        name="usename"
+                        // value={initialState.username}
+                    />
+                    <input
+                        type="password"
+                        name="password"
+                        // value={initialState.password}
+                    /> 
+                    <button>Log In</button>       
+                </form>
+                <p></p>
+            </div>
         </ModalContainer>
     </ComponentContainer>);
 }
