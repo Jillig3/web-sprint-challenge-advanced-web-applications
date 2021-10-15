@@ -42,7 +42,7 @@ test('renders "Associated Press" when no author is given', ()=> {
 });
 
 test('executes handleDelete when the delete button is pressed', ()=> {
-    render(<Article article={testArticle}/>);
+    render(<Article article={testArticle} handleDelete={handleDelete}/>);
     const button = screen.getByTestId("deleteButton");
     userEvent.click(button);
 
