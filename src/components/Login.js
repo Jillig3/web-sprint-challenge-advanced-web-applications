@@ -1,50 +1,59 @@
 import axios from 'axios';
-import React from 'react';
+import React, {useState} from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const Login = (props) => {
-    // const []
-    // handleChange = e => {
-    //     this.setState({
-    //       credentials: {
-    //         ...this.state.credentials,
-    //         [e.target.name]: e.target.value
-    //       }
-    //     });
-    // };
+const Login = () => {
+    const [ displayError, setdisplayError ]= useState(false);
+    const [ state, setState ]= useState({
+        username:"",
+        password:""
+    });
 
-    // login = e => {
-    //     e.preventDefault();
-    //     axios.post("http://localhost:5000/api/login", this.state.credentials)
-    //         .then(resp => {
-    //             localStorage.setItem("token", resp.data.token);
-    //             localStorage.setItem("username", resp.data.username)
-    //         })
-    //         .catch(err=> {
-    //             console.log(err);
-    //         })
-    // }
+    const handleChange = (e) => {
+        setState({
+            ...state,
+            [e.target.name]: e.target.value
+        });
+    };
     
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        axios.post("http://localhost:5000/api/login", state)
+        .then(resp => {    
+            localStorage.setItem("token", resp.data.token);
+            localStorage.setItem("username", resp.data.username)
+            push('/view')
+        })
+        .catch(err=> {
+            console.log(err)
+            setdisplayError(true)
+         })
+    }
     
     return(<ComponentContainer>
         <ModalContainer>
             <h1>Welcome to Blogger Pro</h1>
             <h2>Please enter your account information.</h2>
             <div>
-                <form>
+                <form onSubmit={handleSubmit}>
                     <input
                         type="text"
                         name="usename"
-                        // value={initialState.username}
+                        id="username"
+                        onChange={handleChange}
                     />
                     <input
                         type="password"
                         name="password"
-                        // value={initialState.password}
+                        id="password"
+                        onChange={handleChange}
                     /> 
-                    <button>Log In</button>       
+                    <Link to={`/view`} ><button id="submit">Log In</button></Link>      
                 </form>
-                <p></p>
+                {
+                displayError && <p id="error" title={`a server provided error message can be found in ${err.response.data}`}/>  
+                }
             </div>
         </ModalContainer>
     </ComponentContainer>);
