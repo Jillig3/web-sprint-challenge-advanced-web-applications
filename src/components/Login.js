@@ -21,9 +21,9 @@ const Login = () => {
         e.preventDefault();
         axios.post("http://localhost:5000/api/login", state)
         .then(resp => {    
+            console.log(resp)
             localStorage.setItem("token", resp.data.token);
             localStorage.setItem("username", resp.data.username)
-            push('/view')
         })
         .catch(err=> {
             console.log(err)
@@ -39,7 +39,7 @@ const Login = () => {
                 <form onSubmit={handleSubmit}>
                     <input
                         type="text"
-                        name="usename"
+                        name="username"
                         id="username"
                         onChange={handleChange}
                     />
@@ -49,10 +49,10 @@ const Login = () => {
                         id="password"
                         onChange={handleChange}
                     /> 
-                    <Link to={`/view`} ><button id="submit">Log In</button></Link>      
+                    <button id="submit">Log In</button> 
                 </form>
                 {
-                displayError && <p id="error" title={`a server provided error message can be found in ${err.response.data}`}/>  
+                displayError && <p id="error" title={`a server provided error message can be found in Error: 403`}/>  
                 }
             </div>
         </ModalContainer>

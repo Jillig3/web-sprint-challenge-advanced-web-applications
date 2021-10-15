@@ -23,7 +23,7 @@ const authenticator = (req, res, next) => {
 //Get All Articles Endpoint
 api.post('/api/login', (req, res) => {
   const {username, password, role, token}  = credentials;
-
+  console.log(req.body);
   if (username === req.body.username && password === req.body.password) {
     res.json({
       username,
@@ -52,6 +52,10 @@ api.get('/api/articles', authenticator, (req, res) => {
 //Get Post Endpoint
 api.get('/api/articles/:id', authenticator, (req, res) => {
   res.json(Articles.getById(req.params.id))
+})
+
+api.get('/api/test', (req, res) => {
+  res.json(Articles.getAll())
 })
 
 //Create Post Endpoint
